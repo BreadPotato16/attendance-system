@@ -1,3 +1,4 @@
+
 /* ===============================
    RESET
 ================================ */
@@ -25,6 +26,9 @@ body {
 .app {
   min-height: 100vh;
   transition: background 0.3s ease, color 0.3s ease;
+  width: 100%;
+  padding: 30px;
+  margin: 30px;
 }
 
 /* ===============================
@@ -101,27 +105,6 @@ body {
 }
 
 /* ===============================
-   CARD
-================================ */
-.card {
-  width: 100%;
-  border-radius: 18px;
-  padding: 26px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.18);
-}
-
-.card h2 {
-  margin-bottom: 16px;
-  font-size: 1.35rem;
-}
-
-/* ===============================
    LEFT COLUMN STACK
 ================================ */
 .container > .card:nth-child(1),
@@ -163,6 +146,7 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: transform 0.2s ease, opacity 0.2s ease;
+  margin: 20px;
 }
 
 .btn:hover {
@@ -178,6 +162,48 @@ body {
 .secondary {
   background: #22c55e;
   color: #ffffff;
+}
+/* ===============================
+   FORM
+================================ */
+.attendance-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  color: #0b1220;
+  background-color: #ccc;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+}
+
+.attendance-form .btn {
+  padding: 14px;
+  font-weight: 600;
+  border-radius: 12px;
 }
 
 /* ===============================

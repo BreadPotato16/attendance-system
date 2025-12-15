@@ -1,8 +1,43 @@
-import { useState } from "react";
+
+import React, { useState } from "react";
 import "./App.css";
+import AttendanceForm from "./components/attendanceForm";
+import AttendanceList from "./components/attendanceList";
 
 function App() {
   const [theme, setTheme] = useState("light");
+
+  // State for all attendance records
+  const [records, setRecords] = useState([]);
+
+  // State for editing
+  const [editRecord, setEditRecord] = useState(null);
+
+  // Add or update record
+  const handleSave = (record) => {
+    if (editRecord) {
+      // Update existing record
+      setRecords((prev) =>
+        prev.map((r) => (r.id === editRecord.id ? { ...r, ...record } : r))
+      );
+      setEditRecord(null);
+    } else {
+      // Add new record with unique id
+      setRecords((prev) => [...prev, { ...record, id: Date.now() }]);
+    }
+  };
+
+  // Delete record
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this record?")) {
+      setRecords((prev) => prev.filter((r) => r.id !== id));
+    }
+  };
+
+  // Edit record
+  const handleEdit = (record) => {
+    setEditRecord(record);
+  };
 
   return (
     <div className={`app ${theme}`}>
@@ -18,53 +53,16 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container">
-        {/* Student Info Card */}
-        <div className="card">
-          <h2>Student Information</h2>
-          <div className="info-grid">
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Student ID:</strong> 2025-001</p>
-            <p><strong>Course:</strong> BS Information Technology</p>
-          </div>
-        </div>
+      <main>
+        {/* Attendance Form */}
+        <AttendanceForm onSave={handleSave} editRecord={editRecord} />
 
-        {/* Attendance Actions */}
-        <div className="card actions">
-          <button className="btn primary">⏰ Time In</button>
-          <button className="btn secondary">⏳ Time Out</button>
-        </div>
-
-        {/* Attendance Table */}
-        <div className="card">
-          <h2>Attendance Record</h2>
-          <div className="table-wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2025-01-10</td>
-                  <td>08:02 AM</td>
-                  <td>05:00 PM</td>
-                  <td className="status present">Present</td>
-                </tr>
-                <tr>
-                  <td>2025-01-11</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td className="status absent">Absent</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        {/* Attendance List */}
+        <AttendanceList
+          data={records}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
       </main>
     </div>
   );
