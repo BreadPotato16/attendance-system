@@ -1,42 +1,238 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ===============================
+   RESET
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ===============================
+   BODY
+================================ */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* ensures full height for centering */
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* ===============================
+   APP WRAPPER
+================================ */
+.app {
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* ===============================
+   LIGHT MODE
+================================ */
+.app.light {
+  background: #f3f6fb;
+  color: #1f2933;
+}
+
+.app.light .card {
+  background: #ffffff;
+}
+
+/* ===============================
+   DARK MODE
+================================ */
+.app.dark {
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+.app.dark .card {
+  background: #121b2f;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 40px;
+  background: linear-gradient(135deg, #2563eb, #22c55e);
+  color: #ffffff;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* ===============================
+   THEME TOGGLE
+================================ */
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+/* ===============================
+   MAIN CONTAINER (DESKTOP GRID)
+================================ */
+.container {
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 30px;
+}
+
+/* ===============================
+   CARD
+================================ */
 .card {
-  padding: 2em;
+  width: 100%;
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.18);
+}
+
+.card h2 {
+  margin-bottom: 16px;
+  font-size: 1.35rem;
+}
+
+/* ===============================
+   LEFT COLUMN STACK
+================================ */
+.container > .card:nth-child(1),
+.container > .card:nth-child(2) {
+  grid-column: 1;
+}
+
+.container > .card:nth-child(3) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+/* ===============================
+   STUDENT INFO
+================================ */
+.info-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.info-grid p {
+  font-size: 1rem;
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  flex: 1;
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
+
+.primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.secondary {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  padding: 16px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+th {
+  background: rgba(37, 99, 235, 0.18);
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* ===============================
+   STATUS
+================================ */
+.status.present {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.status.absent {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* ===============================
+   SMALL SCREEN FALLBACK
+   (NOT mobile-first)
+================================ */
+@media (max-width: 1000px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .container > .card:nth-child(3) {
+    grid-column: 1;
+    grid-row: auto;
+  }
 }
